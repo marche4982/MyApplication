@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         memo = new MemoClass();
         memoList = (ListView)findViewById(R.id.memoList);
-        List<MemoClass> list = new ArrayList<MemoClass>();
+        List<MemoDB> list = new ArrayList<MemoDB>();
 
         myListAdapter = new MyListAdapter(this, 0, list);
         memoList.setAdapter(myListAdapter);
@@ -66,16 +66,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if( resultCode == 1 ){
+            int id = data.getIntExtra("id", 0);
+            Bundle bundle = data.getExtras();
+            MemoDB memoDB = new MemoDB();
+            memoDB.setId(bundle.getInt("id"));
+            memoDB.setTitle(bundle.getString("title"));
+            memoDB.setBody(bundle.getString("body"));
+            myListAdapter.remove(memoDB);
+        }
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
         myListAdapter.clear();
-
         RealmResults<MemoDB> all = MemoApplication.db.getall();
-        for(MemoDB i : all){
-            MemoClass memo = new MemoClass();
-            memo.setTitle(i.getTitle());
-            memo.setBody(i.getBody());
-            myListAdapter.add(memo);
+        for(MemoDB memodb: all){
+           myListAdapter.add(memodb);
         }
+
+        memoList.deferNotifyDataSetChanged();
     }
 }

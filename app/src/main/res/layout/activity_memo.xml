@@ -18,8 +18,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="left|top"
-                android:inputType="textMultiLine"
-                android:selectAllOnFocus="true" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -32,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/saveButtonName"/>
 
             <Button
                 android:id="@+id/button_delete"
@@ -40,8 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Button"
-                />
+                android:text="@string/deleteButtonName"/>
 
         </LinearLayout>
 

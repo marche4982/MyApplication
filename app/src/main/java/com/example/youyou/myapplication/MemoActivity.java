@@ -62,17 +62,23 @@ public class MemoActivity extends Activity{
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     MemoApplication.db.delete(memo);
+
+                    Intent data = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", memo.getid());
+                    bundle.putString("title", memo.getTitle());
+                    bundle.putString("body", memo.getBody());
+                    data.putExtras(bundle);
+                    setResult(1, data);
                     finish();
                 }
                 return false;
             }
         });
-
-        // 次回、テキストへのメモ書き込み、登録、更新を行う処理を描く
     }
 
     public void AddColumn(MemoClass memo){
-        MemoApplication.db.add(memo);
+        MemoApplication.db.save(memo);
     }
 
 
