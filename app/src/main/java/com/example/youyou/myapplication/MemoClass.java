@@ -11,6 +11,7 @@ public class MemoClass {
     MemoClass(){
         this.title = "";
         this.body = "";
+        this.id = -1;
     }
 
     public void setTitle(String title){

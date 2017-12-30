@@ -33,7 +33,11 @@ public class DbOperate {
         realm.executeTransaction(new Realm.Transaction(){
             @Override
             public void execute(Realm realm){
-                int id = realm.where(MemoDB.class).max("id").intValue() + 1;
+                int id = 0;
+                Number max = realm.where(MemoDB.class).max("id");
+                if( max != null ) {
+                    id = max.intValue() + 1;
+                }
                 MemoDB db = realm.createObject(MemoDB.class, id);
                 db.setTitle("aaa");
                 db.setBody(column.getBody());
